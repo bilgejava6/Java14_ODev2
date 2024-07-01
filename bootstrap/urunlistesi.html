@@ -37,29 +37,39 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
-        fetch('http://localhost:9090/urun/get-all')
-        .then(data=>data.json())
-        .then(data=>{
-            const urunListRow = document.getElementById('urunListRow');
-            urunListRow.innerHTML = '';
-            data.forEach(urun => {
-                urunListRow.innerHTML += `
-                    <div class="col-3">
-                            <div class="card" style="width: 15rem;">
-                                <img src="https://picsum.photos/200/200" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">BAŞLIK</h5>
-                                    <p class="card-text">${urun.ad}</p>
+        let urunList = [];
+        function getAll(){
+            fetch('http://localhost:9090/urun/get-all')
+            .then(data=>data.json())
+            .then(data=>{                  
+            if(urunList.length !== data.length){
+                console.log('Değişiklik oldu...');
+                urunList = data;
+                const urunListRow = document.getElementById('urunListRow');
+                urunListRow.innerHTML = '';
+                data.forEach(urun => {
+                    urunListRow.innerHTML += `
+                        <div class="col-3">
+                                <div class="card" style="width: 15rem;">
+                                    <img src="https://picsum.photos/200/200" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">BAŞLIK</h5>
+                                        <p class="card-text">${urun.ad}</p>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">${urun.fiyat}</li>
+                                        <li class="list-group-item">${urun.stok}</li>                             
+                                    </ul>                           
                                 </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">${urun.fiyat}</li>
-                                    <li class="list-group-item">${urun.stok}</li>                             
-                                </ul>                           
-                            </div>
-                    </div>
-                `;
-            });
+                        </div>
+                    `;
+                });
+            }
+           
         })
+    
+        }
+        setInterval(()=> getAll(),400);
     </script>
 </body>
 </html>
