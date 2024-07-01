@@ -34,12 +34,12 @@
                             </div>
                             <div class="input-group mb-3">
                                 <select onchange="loadModels()" id="markaList" class="form-select" aria-label="Default select example">
-                                    <option selected>Marka seçiniz</option>                              
+                                    <option value="0" selected>Marka seçiniz</option>                              
                                 </select>
                             </div>
                             <div class="input-group mb-3">
                                 <select id="modelList" class="form-select" aria-label="Default select example">
-                                    <option selected>Model seçiniz</option>                                    
+                                    <option value="0" selected>Model seçiniz</option>                                    
                                   </select>
                             </div>
                         </div>
@@ -83,7 +83,7 @@
             const modelSelect = document.getElementById('modelList');
             
             let selectedId = markaSelect.value;
-            if(selectedId !== "Marka Seçiniz"){
+            if(selectedId !== 0){
                 modelSelect.innerHTML = '<option selected>Model Seçiniz</option>';
                 fetch('http://localhost:9090/urun/get-all-by-marka-id?markaId='+selectedId)
                 .then(data=>data.json())
@@ -96,6 +96,7 @@
                 modelSelect.innerHTML = '<option selected>Model Seçiniz</option>';
             }
         }
+     
         function urunKaydet(){
             const modelId = document.getElementById('modelList').value;
             const markaId = document.getElementById('markaList').value;
