@@ -1,0 +1,27 @@
+.header-top{
+    background-color: #5fa4d3;
+    padding: 10px 0; 
+}
+/***
+padding: 10px -> tüm iç alanları 10px itekler
+padding-left: 10px -> sadece solu 10px itekler
+padding: 10px 0; -> [top,bottom] [left,right]
+*/
+.project-padding{
+    padding: 0 10%;
+}
+
+.header-nav{
+    padding: 24px 0;
+}
+
+.logo-left{
+    color: #3382b7;
+    font-weight: bolder;
+    font-size: xx-large;
+}
+
+.logo-right{
+    font-weight: bold;
+    font-size: x-large;
+}
